@@ -3,11 +3,11 @@ import urllib2
 
 def handler(event,context):
     headers = { 'Accept': 'application/json', 'User-Agent': 'https://github.com/acharrett/NoServerNovember/tree/master/Lorem' }
-    request = urllib2.Request('http://www.randomtext.me/api/gibberish/', headers=headers)
+    request = urllib2.Request('https://ucmf6wqovh.execute-api.us-east-1.amazonaws.com/dev/', headers=headers)
     lorem_response = urllib2.urlopen(request).read()
     lorem_dict = json.loads(lorem_response)
 
-    body_text = gen_html_body(lorem_dict['text_out'])
+    body_text = gen_html_body(lorem_dict['random_text'])
    
     response = {
         "statusCode": 200,
