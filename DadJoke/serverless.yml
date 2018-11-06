@@ -12,7 +12,7 @@ functions:
     timeout: 30
     events:
       - schedule:
-          rate: "cron(22 10 ? * TUE *)"
+          rate: "rate(3 hours)"
           enabled: true
           name: "DadJokeEvent"
           description: "Runs the dad jokes"
