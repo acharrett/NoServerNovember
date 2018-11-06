@@ -1,0 +1,14 @@
+service: lorem
+
+provider:
+  name: aws
+  runtime: python2.7
+  region: us-east-1
+
+functions:
+  lorem:
+    handler: main.handler
+    events:
+     - http:
+         path: /
+         method: get
