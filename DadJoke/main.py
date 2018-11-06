@@ -4,7 +4,7 @@ import twitter
 import configparser
 
 def handler(event, context):
-    headers = { 'Accept': 'application/json', 'User-Agent': 'https://github.com/acharrett/NoServerNovember/DadJoke' }
+    headers = { 'Accept': 'application/json', 'User-Agent': 'https://github.com/acharrett/NoServerNovember/tree/master/DadJoke' }
     joke_request = urllib2.Request('https://icanhazdadjoke.com/', headers=headers)
     joke_response = urllib2.urlopen(joke_request).read()
     joke_dict = json.loads(joke_response)
