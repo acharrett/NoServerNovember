@@ -1,0 +1,27 @@
+service: bttf
+
+provider:
+  name: aws
+  runtime: python2.7
+  region: us-east-1
+  environment:
+    GIPHY_API_KEY: 'xyz'
+
+custom:
+  customDomain:
+    domainName: bttf.charrett.uk
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+    endpointType: 'regional'
+
+functions:
+  bttfgif:
+    handler: main.handler
+    events:
+     - http:
+         path: /
+         method: get
+
+plugins:
+ - serverless-domain-manager
