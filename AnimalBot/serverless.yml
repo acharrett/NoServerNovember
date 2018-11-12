@@ -1,0 +1,45 @@
+service: imagebot
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: arn:aws:dynamodb:*:*:table/no-server-november
+    - Effect: Allow
+      Action:
+        - rekognition:DetectLabels
+      Resource: "*"
+
+functions:
+  imagebot:
+    handler: main.handler
+    memorySize: 128
+    timeout: 30
+    events:
+      - schedule:
+          rate: "rate(5 minutes)"
+          enabled: true
+          name: "ImageBot"
+          description: "Runs the twitter image bot"
+
+resources:
+  Resources:
+    DynamoDbTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: no-server-november
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
