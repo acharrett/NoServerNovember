@@ -40,6 +40,8 @@ def get_image_label(rekognition,url):
     image_data = url_resp.read()
     rek_resp = rekognition.detect_labels(Image={ 'Bytes': image_data })
     top_label = rek_resp['Labels'][0]['Name'] 
+    top_label += " "
+    top_label += rek_resp['Labels'][1]['Name'] 
     return top_label 
 
 def twitter_connect(config_file_name):
