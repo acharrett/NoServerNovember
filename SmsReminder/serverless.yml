@@ -10,10 +10,10 @@ provider:
       Action:
         - sns:Publish
       Resource:
-        'Ref': 'SmsEndpoint'
+        Ref: SmsEndpoint
   environment:
     TOPIC_ARN:
-      'Ref': 'SmsEndpoint'
+      Ref: SmsEndpoint
 
 functions:
   smsreminder:
@@ -39,9 +39,3 @@ resources:
           Ref: SmsEndpoint
         Endpoint: '+4412345678'
         Protocol: 'sms'
-  Outputs:
-    SmsEndpoint:
-      Value:
-        "Ref": SmsEndpoint
-      Export:
-        Name: smsEndpointTopic
